@@ -1,5 +1,11 @@
 #! /usr/bin/python
 
+# To enable importing from samscripts submodule
+import os, sys
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(SCRIPT_PATH, 'samscripts/src'))
+import utility_sam
+
 ###################################################################
 ### PAF file structure
 # 1. QNAME:     Query name
@@ -27,7 +33,7 @@
 ###################################################################
 
 # Reads a PAF file and return mappings as PAF lines
-# Last e
+# Last element contains attributes in the form of 'TAG:TYPE:VALUE'
 def load_paf(paf_file):
     
     paf_lines = []
@@ -74,4 +80,36 @@ def load_paf(paf_file):
     return paf_lines
 
 
-    
+# Reads a SAM file and return mappings as PAF lines
+# SAM file elements are converted to PAF attributes
+def load_sam(sam_file):
+    paf_lines = []
+    attributes = {}
+
+    # Loading SAM file into hash
+    # Keeping only SAM lines with regular CIGAR string, and sorting them according to position
+    qnames_with_multiple_alignments = {}
+    [sam_hash, sam_hash_num_lines, sam_hash_num_unique_lines] = utility_sam.HashSAMWithFilter(sam_file, qnames_with_multiple_alignments)
+
+    for (qname, sam_lines) in sam_hash.iteritems():
+        for samline in sam_lines:
+            pafline = {}
+            attributes = {}
+
+            # pafline['QNAME'] = samline.qname
+            # pafline['QLEN'] = int(elements[1])
+            # pafline['QSTART'] = int(elements[2])
+            # pafline['QEND'] = int(elements[3])
+            # pafline['STRAND'] = elements[4]
+            # pafline['TNAME'] = samline.rname
+            # pafline['TLEN'] = int(elements[6])
+            # pafline['TSTART'] = int(elements[7])
+            # pafline['TEND'] = int(elements[8])
+            # pafline['NRM'] = int(elements[9])
+            # pafline['ABL'] = int(elements[10])
+            # pafline['MQUAL'] = int(elements[11])
+
+            pafline['ATTRIB'] = attributes
+            paf_lines.append(pafline)
+
+    return paf_lines

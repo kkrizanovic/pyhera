@@ -1,3 +1,9 @@
 [submodule "samscripts"]
 	path = samscripts
 	url = https://github.com/isovic/samscripts.git
+[submodule "minimap2"]
+	path = minimap2
+	url = https://github.com/lh3/minimap2.git
+[submodule "ezra"]
+	path = ezra
+	url = https://gitlab.com/Krpa/ezra.git
