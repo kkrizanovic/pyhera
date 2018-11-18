@@ -47,7 +47,7 @@ paramdefs = {'--version' : 0,
              '--print-graph' : 0,
              '--check-paths' : 0,
              '--SImin' : 1,
-             '--OHmax' : 1
+             '--OHmax' : 1,
              '--MinMCPaths' : 1}
 
 
@@ -60,7 +60,7 @@ def load_global_parameters(paramdict):
         SImin = float(paramdict['--SImin'][0])
     if '--OHmax' in paramdict:
         OHmax = float(paramdict['--OHmax'][0])
-     if '--MinMCPaths' in paramdict:
+    if '--MinMCPaths' in paramdict:
         MinMCPaths = int(paramdict['--MinMCPaths'][0])
 
 
