@@ -13,11 +13,21 @@ Ezra is a result of a graduation thesis work done by Ivan Krpelnik on University
 
 Ezra is included as a submodule, with main repository at: https://gitlab.com/Krpa/ezra.
 
-## Scaffolding script
+### Scaffolding script
+Scaffolding script combines PYHera and Ezra, according to a given scaffolding plan, to iteratively perform the scaffolding, using output of the previous iteration as input for the next one. THe script will use Minimap2 to produce overlaps needed for the scaffolding.
 
 ## Installation
 
+  1. Clone the repository, and include all submodules
+  
+  git clone --recursive https://github.com/kkrizanovic/pyhera.git
+  
+  __Note:__ if you omitted --recursive from git clone, run git submodule update --init --recursive before proceeding with compilation.
+  
+  2. 
 
 ### Dependencies
+
+## Running the scripts
 
 
