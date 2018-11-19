@@ -15,7 +15,10 @@ paramdefs = {'--version' : 0,
              '-p' : 1,
              '--plan' : 1,
              '-r' : 1,
-             '--results' : 1}
+             '--results' : 1,
+             '--MM2Options' : 1,
+             '--EOptions' : 1,
+             '--POptions' : 1}
 
 # A default scaffolding plan, run Pyhera once and then Ezra three times
 default_plan = 'P1E3'
@@ -23,7 +26,7 @@ default_plan = 'P1E3'
 # Placeholders for default options for running PyHera and Ezra
 default_PHoptions = ''
 default_Eoptions = ''
-default_MM2options = '-x ava-pb --dual=yes'
+default_MM2options = '-t 12 -x ava-pb --dual=yes'
 
 # Setting run names for Pyhera, Ezra, Minimap2 and Python
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -148,7 +151,7 @@ def scaffold_with_plan(contigsfile, readsfile, paramdict, resultsfolder = None, 
 					new_reads = os.path.join(results_subfolder, 'reads.fastq')
 				else:
 					new_reads = os.path.join(results_subfolder, 'reads.fasta')
-					
+
 				reads2contigs_file = os.path.join(results_subfolder, 'readsToContigs.paf')
 
 				if os.path.exists(new_contigs):
@@ -217,6 +220,9 @@ def scaffold_with_plan(contigsfile, readsfile, paramdict, resultsfolder = None, 
 					logfile = os.path.join(results_subfolder, 'PyHera_i%0d.log' % iteration)
 					with open(logfile, 'w') as lfile:
 						lfile.write(output)
+					# If PyHera doesn't produce a scaffold file, copy the last one
+					if not os.path.exists(resultfile):
+						shutil.copy(temp_contigs_file, resultfile)
 
 				#4P Prepare for the next iteration
 				temp_contigs_file = resultfile
