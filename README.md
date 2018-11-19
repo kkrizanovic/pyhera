@@ -18,15 +18,29 @@ Scaffolding script combines PYHera and Ezra, according to a given scaffolding pl
 
 ## Installation
 
-  1. Clone the repository, and include all submodules
+  1. Clone the repository, and include all submodules.
   
-  git clone --recursive https://github.com/kkrizanovic/pyhera.git
+    git clone --recursive https://github.com/kkrizanovic/pyhera.git
   
-  __Note:__ if you omitted --recursive from git clone, run git submodule update --init --recursive before proceeding with compilation.
+  __Note:__ if you omitted `<--recursive>` from `<git clone>`, run `<git submodule update --init --recursive>` before proceeding.
   
-  2. 
+  2. Build Ezra
+  
+    cd Ezra
+    mkdir build
+    cd build
+    cmake ..
+    make
+
+  3. Build Minimap2
+  
+    cd Minimap2
+    make
+
+  Pythons scripts, such as PyHery, Scaffolder script and samscripts tool do not need to be installed.
 
 ### Dependencies
+Python scripts require PYthon2.7. Ezra requires CMake 3.5.
 
 ## Running the scripts
 
